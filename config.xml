@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module>
+	<name>issue25716</name>
+	<displayName><![CDATA[Issue 25716]]></displayName>
+	<version><![CDATA[0.0.1]]></version>
+	<description><![CDATA[Use case concerning Issue 25716 - https://github.com/PrestaShop/PrestaShop/issues/25716]]></description>
+	<author><![CDATA[Pascal Alberty]]></author>
+	<tab><![CDATA[administration]]></tab>
+	<is_configurable>1</is_configurable>
+	<need_instance>1</need_instance>
+</module>
