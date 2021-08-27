@@ -31,6 +31,8 @@ if (!defined('_PS_VERSION_')) {
 class Issue25716 extends Module
 {
     protected $config_form = false;
+    protected $image_folder = 'issue25716';
+    protected static $access_rights = 0755;
 
     public function __construct()
     {
@@ -65,7 +67,8 @@ class Issue25716 extends Module
 
         return parent::install() &&
             $this->registerHook('header') &&
-            $this->registerHook('backOfficeHeader');
+            $this->registerHook('backOfficeHeader')
+            && $this->installTab();
     }
 
     public function uninstall()
@@ -74,7 +77,9 @@ class Issue25716 extends Module
 
         include(dirname(__FILE__).'/sql/uninstall.php');
 
-        return parent::uninstall();
+        return parent::uninstall() ;
+        //&&
+        //$this->uninstallTab();
     }
 
     /**
@@ -219,4 +224,44 @@ class Issue25716 extends Module
         $this->context->controller->addJS($this->_path.'/views/js/front.js');
         $this->context->controller->addCSS($this->_path.'/views/css/front.css');
     }
+
+    public $tabs = [
+        [
+            'name' => 'Issue 25716',
+            'class_name' => 'AdminIssue25716',
+            'visible' => true,
+            'parent_class_name' => 'AdminDashboard',
+        ],
+    ];
+
+    private function installTab()
+    {
+        $tab = new Tab();
+        $tab->active = 1;
+        $tab->class_name = 'AdminIssue25716';
+        $tab->name = [];
+
+        foreach (Language::getLanguages(true) as $lang) {
+            $tab->name[$lang['id_lang']] = 'Issue 25716';
+        }
+
+        $tab->id_parent = (int)Tab::getIdFromClassName('ShopParameters');
+        $tab->module = $this->name;
+
+        return $tab->add();
+    }
+
+    public function uninstallTab(): bool
+    {
+        $id_tab = (int)Tab::getIdFromClassName('AdminIssue25716');
+
+        if ($id_tab) {
+            $tab = new Tab($id_tab);
+
+            return $tab->delete();
+        } else {
+            return false;
+        }
+    }
+
 }

@@ -27,6 +27,8 @@ $sql = array();
 
 $sql[] = 'CREATE TABLE IF NOT EXISTS `' . _DB_PREFIX_ . 'issue25716` (
     `id_issue25716` int(11) NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(256),
+    `picture` VARCHAR(256),
     PRIMARY KEY  (`id_issue25716`)
 ) ENGINE=' . _MYSQL_ENGINE_ . ' DEFAULT CHARSET=utf8;';
 

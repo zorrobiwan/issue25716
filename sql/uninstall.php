@@ -31,6 +31,8 @@
  */
 $sql = array();
 
+$sql[] = 'DROP TABLE `' . _DB_PREFIX_ . 'issue25716`';
+
 foreach ($sql as $query) {
     if (Db::getInstance()->execute($query) == false) {
         return false;
